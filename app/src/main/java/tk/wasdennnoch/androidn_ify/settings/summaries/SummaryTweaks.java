@@ -245,7 +245,7 @@ public class SummaryTweaks {
             WirelessAndNetworksTweaks.hookWifiTile(tile, context);
         } else if (id == bluetooth_settings) {
             tileId = "bluetooth_settings";
-            WirelessAndNetworksTweaks.hookBluetoothTile(tile);
+            WirelessAndNetworksTweaks.hookBluetoothTile(tile, context);
             //} else if (id == sim_settings) {
             //    XposedHelpers.setObjectField(tile, "summary", "sim_settings");
         } else if (id == data_usage_settings) {

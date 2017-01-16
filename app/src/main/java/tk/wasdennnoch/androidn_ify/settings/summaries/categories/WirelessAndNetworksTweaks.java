@@ -21,7 +21,6 @@ import tk.wasdennnoch.androidn_ify.utils.ResourceUtils;
 public class WirelessAndNetworksTweaks {
 
     private static final String TAG = "WirelessAndNetworksTweaks";
-    private static BluetoothManager bluetoothManager;
 
     public static void hookWifiTile(Object tile, Context context) {
         String summary;
@@ -49,8 +48,9 @@ public class WirelessAndNetworksTweaks {
         XposedHelpers.setObjectField(tile, "summary", summary);
     }
 
-    public static void hookBluetoothTile(Object tile) {
+    public static void hookBluetoothTile(Object tile, Context context) {
         String summary = ResourceUtils.getInstance().getString(R.string.disabled);
+        BluetoothManager bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter.isEnabled()) {
             summary = bluetoothAdapter.getName(); // TODO this returns the devices name
