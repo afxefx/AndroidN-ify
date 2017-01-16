@@ -172,6 +172,11 @@ public class QSDetail extends LinearLayout {
     private void updateDetailText() {
         //mDetailDoneButton.setText(R.string.quick_settings_done);
         //mDetailSettingsButton.setText(R.string.quick_settings_more_settings);
+        int buttonPadding = ResourceUtils.getInstance(mContext).getDimensionPixelSize(R.dimen.qs_detail_button_padding);
+        mDetailDoneButton.setBackground(ResourceUtils.getInstance(mContext).getDrawable(R.drawable.qs_btn_borderless_rect));
+        mDetailSettingsButton.setBackground(ResourceUtils.getInstance(mContext).getDrawable(R.drawable.qs_btn_borderless_rect));
+        mDetailDoneButton.setPadding(buttonPadding,buttonPadding,buttonPadding,buttonPadding);
+        mDetailSettingsButton.setPadding(buttonPadding,buttonPadding,buttonPadding,buttonPadding);
     }
 
     public void updateResources() {

@@ -1216,8 +1216,11 @@ public class NotificationHooks {
         return false;
     }
 
-    public static void hookResAndroid(XC_InitPackageResources.InitPackageResourcesParam resparam) {
+    public static void hookResAndroid(XC_InitPackageResources.InitPackageResourcesParam resparam, String modulePath) {
         try {
+
+            final XModuleResources modRes = XModuleResources.createInstance(modulePath, resparam.res);
+
             if (ConfigUtils.notifications().change_style) {
 
                 resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_material_action", notification_material_action);
@@ -1231,6 +1234,23 @@ public class NotificationHooks {
                 resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_template_material_big_picture", notification_template_material_big_picture);
                 resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_template_material_big_text", notification_template_material_base);
                 resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_template_material_inbox", notification_template_material_base);
+
+                resparam.res.setReplacement(PACKAGE_ANDROID, "dimen", "notification_title_text_size", modRes.fwd(R.dimen.notification_title_text_size));
+
+                resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_material_media_action", new XC_LayoutInflated() {
+                    @Override
+                    public void handleLayoutInflated(LayoutInflatedParam liparam) throws Throwable {
+                        ImageButton action = (ImageButton) liparam.view;
+                        Context context = action.getContext();
+                        ResourceUtils res = ResourceUtils.getInstance(context);
+                        int width_height = res.getDimensionPixelSize(R.dimen.notification_media_action_width);
+                        RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams(width_height,width_height);
+                        lParams.setMarginEnd(res.getDimensionPixelSize(R.dimen.notification_media_action_margin));
+                        int padding = ResourceUtils.getInstance(context).getDimensionPixelSize(R.dimen.notification_media_action_padding);
+                        action.setPadding(0, padding, 0, padding);
+                        action.setBackground(res.getDrawable(R.drawable.notification_material_media_action_background));
+                    }
+                });
 
                 resparam.res.hookLayout(PACKAGE_ANDROID, "layout", "notification_material_action_list", new XC_LayoutInflated() {
                     @Override
@@ -1615,7 +1635,7 @@ public class NotificationHooks {
             ViewUtils.setMarginEnd(notificationMain.findViewById(context.getResources().getIdentifier("text", "id", PACKAGE_ANDROID)), 0);
 
             LinearLayout contentContainer = new LinearLayout(context);
-            contentContainer.setPadding(0, res.getDimensionPixelSize(R.dimen.notification_content_media_margin_top), 0, 0);
+            contentContainer.setPadding(0, res.getDimensionPixelSize(R.dimen.notification_content_margin_top), 0, 0);
             contentContainer.setOrientation(LinearLayout.VERTICAL);
 
             LinearLayout.LayoutParams contentContainerLp = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
@@ -1686,7 +1706,7 @@ public class NotificationHooks {
             layout.addView(notificationMain, 1);
 
             FrameLayout.LayoutParams notificationMainLp = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-            notificationMainLp.setMargins(0, res.getDimensionPixelSize(R.dimen.notification_content_media_margin_top), 0, 0);
+            notificationMainLp.setMargins(0, res.getDimensionPixelSize(R.dimen.notification_content_margin_top), 0, 0);
             notificationMain.setLayoutParams(notificationMainLp);
 
             LinearLayout.LayoutParams contentContainerLp = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
@@ -1697,9 +1717,10 @@ public class NotificationHooks {
             contentContainer.setMinimumHeight(res.getDimensionPixelSize(R.dimen.notification_min_content_height));
             contentContainer.setPadding(0, 0, 0, 0);
 
+            int mediaMargin = res.getDimensionPixelSize(R.dimen.media_actions_margin_bottom);
             LinearLayout.LayoutParams mediaActionsLp = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             mediaActionsLp.gravity = Gravity.BOTTOM | Gravity.END;
-            mediaActionsLp.setMargins(0, 0, 0, res.getDimensionPixelSize(R.dimen.media_actions_margin_bottom));
+            mediaActionsLp.setMargins(0, mediaMargin, 0, mediaMargin);
             mediaActionsLp.setMarginStart(res.getDimensionPixelSize(R.dimen.media_actions_margin_start));
             mediaActions.setLayoutParams(mediaActionsLp);
 

@@ -15,6 +15,8 @@
 
     <dimen name="qs_detail_margin_top">28dp</dimen>
     <dimen name="qs_detail_padding_bottom">8dp</dimen>
+    <dimen name="qs_detail_title_padding">16dp</dimen>
+    <dimen name="qs_detail_button_padding">12dp</dimen>
 
     <dimen name="right_layout_height">48dp</dimen>
     <dimen name="right_layout_margin_top">4dp</dimen>
@@ -57,7 +59,6 @@
     <dimen name="notification_actions_margin_start">8dp</dimen>
     <dimen name="notification_content_margin_start">16dp</dimen>
     <dimen name="notification_content_margin_top">25.5dp</dimen> <!-- 37.5 - 12 -->
-    <dimen name="notification_content_media_margin_top">34.5dp</dimen>
     <dimen name="notification_header_height">53dp</dimen>
     <dimen name="notification_header_margin_top" tools:ignore="UnusedResources">10dp</dimen>
     <dimen name="notification_right_icon_size">40dp</dimen>
@@ -75,13 +76,17 @@
     <dimen name="notification_text_inbox_margin_end">48dp</dimen>
     <dimen name="notification_actions_margin_top">16dp</dimen>
     <dimen name="notification_action_list_height">56dp</dimen>
+    <dimen name="notification_media_action_width">48dp</dimen>
+    <dimen name="notification_media_action_padding">8dp</dimen>
+    <dimen name="notification_media_action_margin">2dp</dimen>
     <dimen name="notification_dismiss_button_padding">16dp</dimen>
     <dimen name="notification_dismiss_button_padding_top">14dp</dimen>
     <dimen name="notification_divider_height">0.5dp</dimen>
+    <dimen name="notification_title_text_size">14sp</dimen>
     <dimen name="z_distance_between_notifications">0.5dp</dimen>
     <dimen name="task_progress_height">2dp</dimen>
     <dimen name="no_notifications_padding_top">28dp</dimen>
-    <dimen name="no_notifications_text_size">16sp</dimen>
+    <dimen name="no_notifications_text_size">14sp</dimen>
 
     <dimen name="notification_separator_size">1dp</dimen>
     <dimen name="notification_header_shrink_min_width">72dp</dimen>
@@ -91,6 +96,7 @@
     <dimen name="notification_badge_size" tools:ignore="UnusedResources">12dp</dimen>
 
     <dimen name="notification_panel_width" tools:ignore="UnusedResources">@dimen/match_parent</dimen>
+    <dimen name="standard_notification_panel_width">416dp</dimen>
     <dimen name="navigation_bar_size">48dp</dimen>
 
     <dimen name="notification_min_content_height">41dp</dimen>
@@ -157,6 +163,6 @@
     <dimen name="media_actions_margin_start">10dp</dimen>
     <dimen name="big_media_actions_margin_start">8dp</dimen>
     <dimen name="zero">0dp</dimen>
-    <dimen name="notification_text_line1_margin_start">16dp</dimen>
+    <dimen name="notification_text_line1_margin_start">10dp</dimen>
 
 </resources>
